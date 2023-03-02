@@ -1,0 +1,7 @@
+jusokr:
+  enabled: true
+  confm-Key:
+logging:
+  level:
+    root: info
+    org.springframework.web: debug
