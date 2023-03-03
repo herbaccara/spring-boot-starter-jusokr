@@ -29,7 +29,7 @@ class JusoKrAutoConfiguration {
     fun restTemplate(): RestTemplate = RestTemplate()
 
     @Bean
-    fun dataKrService(
+    fun jusoKrService(
         restTemplate : RestTemplate,
         objectMapper: ObjectMapper,
         properties: JusoKrProperties
