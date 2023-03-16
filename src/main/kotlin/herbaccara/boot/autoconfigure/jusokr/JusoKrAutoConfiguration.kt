@@ -13,7 +13,7 @@ import java.util.*
 
 @AutoConfiguration
 @EnableConfigurationProperties(JusoKrProperties::class)
-@ConditionalOnProperty(prefix = "jusokr", value = ["enabled"], havingValue = "true")
+@ConditionalOnProperty(prefix = "jusokr", value = ["enabled"], havingValue = "true", matchIfMissing = true)
 class JusoKrAutoConfiguration {
 
     @Bean
