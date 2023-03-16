@@ -8,5 +8,6 @@ import org.springframework.boot.context.properties.ConstructorBinding
 data class JusoKrProperties(
     val enabled: Boolean = true,
     val rootUri: String = "https://business.juso.go.kr",
+    val failOnUnknownProperties: Boolean = false,
     val confmKey: String
 )
