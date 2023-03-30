@@ -37,13 +37,19 @@ class JusoKrService(
 
         internal fun filteredKeyword(keyword: String): String {
             var filteredKeyword = keyword
-            for (reservedWord in reservedWords) {
-                if (filteredKeyword.contains(reservedWord, true)) {
-                    filteredKeyword = filteredKeyword.replace(reservedWord, "", true)
-                }
-            }
             for (c in specialCharacters) {
                 filteredKeyword = filteredKeyword.replace(c, "")
+            }
+            var stop = false
+            while (stop.not()) {
+                var replace = false
+                for (reservedWord in reservedWords) {
+                    if (filteredKeyword.contains(reservedWord, true)) {
+                        filteredKeyword = filteredKeyword.replace(reservedWord, "", true)
+                        replace = true
+                    }
+                }
+                stop = replace.not()
             }
             return filteredKeyword.replace("\\s+".toRegex(), " ")
         }

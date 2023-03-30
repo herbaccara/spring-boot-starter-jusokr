@@ -11,4 +11,12 @@ class ReservedWordsTest {
         val filteredKeyword = JusoKrService.filteredKeyword(keyword)
         Assertions.assertEquals("aa bb", filteredKeyword)
     }
+
+    @Test
+    fun test2() {
+        val keyword = "OO%RR123"
+        val filteredKeyword = JusoKrService.filteredKeyword(keyword)
+        println(filteredKeyword)
+        Assertions.assertEquals("123", filteredKeyword)
+    }
 }
