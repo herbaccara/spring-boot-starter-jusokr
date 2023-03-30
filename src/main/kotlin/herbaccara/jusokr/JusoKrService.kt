@@ -125,7 +125,7 @@ class JusoKrService(
                     queryParam("searchType", searchType.name)
                 }
                 if (dongNm.isNullOrBlank().not()) {
-                    queryParam("dongnm", dongNm)
+                    queryParam("dongnm", filteredKeyword(dongNm!!))
                 }
             }
             .queryParam("resultType", "json")
