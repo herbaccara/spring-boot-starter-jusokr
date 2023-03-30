@@ -15,6 +15,6 @@ data class JusoKrProperties(
         val link: String? = null,
         val eng: String? = null,
         val coord: String? = null,
-        val detail: String? = null,
+        val detail: String? = null
     )
 }
