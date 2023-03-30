@@ -8,11 +8,13 @@ data class AddrDetailApiResult(
 ) : ApiResult<Juso> {
 
     data class Juso(
-        val buldMnnm: String,
-        val rnMgtSn: String,
-        val dongNm: String,
         val admCd: String,
-        val buldSlno: String,
-        val udrtYn: String
+        val rnMgtSn: String,
+        val udrtYn: String,
+        val buldMnnm: Int,
+        val buldSlno: Int,
+        val dongNm: String?,
+        val floorNm: String?,
+        val hoNm: String?
     )
 }

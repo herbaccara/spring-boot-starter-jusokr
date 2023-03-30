@@ -77,17 +77,17 @@ class JusoKrService(
         admCd: String,
         rnMgtSn: String,
         udrtYn: String,
-        buldMnnm: String,
-        buldSlno: String
+        buldMnnm: Int,
+        buldSlno: Int
     ): AddrCoordApiResult {
         val url = "/addrlink/addrCoordApi.do"
 
         val endpoint = UriComponentsBuilder
             .fromHttpUrl("${properties.rootUri}$url")
             .queryParam("confmKey", properties.coordConfmKey)
-            .queryParam("admCd", admCd)
-            .queryParam("rnMgtSn", rnMgtSn)
-            .queryParam("udrtYn", udrtYn)
+            .queryParam("admCd", admCd.filter { it.isDigit() })
+            .queryParam("rnMgtSn", rnMgtSn.filter { it.isDigit() })
+            .queryParam("udrtYn", udrtYn.filter { it.isDigit() })
             .queryParam("buldMnnm", buldMnnm)
             .queryParam("buldSlno", buldSlno)
             .queryParam("resultType", "json")
@@ -105,8 +105,8 @@ class JusoKrService(
         admCd: String,
         rnMgtSn: String,
         udrtYn: String,
-        buldMnnm: String,
-        buldSlno: String,
+        buldMnnm: Int,
+        buldSlno: Int,
         searchType: SearchType? = null,
         dongNm: String? = null
     ): AddrDetailApiResult {
@@ -115,9 +115,9 @@ class JusoKrService(
         val endpoint = UriComponentsBuilder
             .fromHttpUrl("${properties.rootUri}$url")
             .queryParam("confmKey", properties.detailConfmKey)
-            .queryParam("admCd", admCd)
-            .queryParam("rnMgtSn", rnMgtSn)
-            .queryParam("udrtYn", udrtYn)
+            .queryParam("admCd", admCd.filter { it.isDigit() })
+            .queryParam("rnMgtSn", rnMgtSn.filter { it.isDigit() })
+            .queryParam("udrtYn", udrtYn.filter { it.isDigit() })
             .queryParam("buldMnnm", buldMnnm)
             .queryParam("buldSlno", buldSlno)
             .apply {

@@ -8,23 +8,23 @@ data class AddrEngApiResult(
 ) : ApiResult<Juso> {
 
     data class Juso(
-        val zipNo: String,
-        val emdNm: String,
-        val rn: String,
+        val roadAddr: String,
         val jibunAddr: String,
+        val zipNo: String,
+        val admCd: String,
+        val rnMgtSn: String,
+        val bdKdcd: String,
         val siNm: String,
         val sggNm: String,
-        val admCd: String,
-        val udrtYn: String,
-        val lnbrMnnm: String,
-        val roadAddr: String,
-        val korAddr: String,
-        val lnbrSlno: String,
-        val buldMnnm: String,
-        val bdKdcd: String,
-        val rnMgtSn: String,
+        val emdNm: String,
         val liNm: String,
+        val rn: String,
+        val udrtYn: String,
+        val buldMnnm: Int,
+        val buldSlno: Int,
         val mtYn: String,
-        val buldSlno: String
+        val lnbrMnnm: Int,
+        val lnbrSlno: Int,
+        val korAddr: String
     )
 }

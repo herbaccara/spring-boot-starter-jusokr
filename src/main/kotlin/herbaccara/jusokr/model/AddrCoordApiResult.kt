@@ -12,8 +12,8 @@ data class AddrCoordApiResult(
         val rnMgtSn: String,
         val bdMgtSn: String,
         val udrtYn: String,
-        val buldMnnm: String,
-        val buldSlno: String,
+        val buldMnnm: Int,
+        val buldSlno: Int,
         val entX: String,
         val entY: String,
         val bdNm: String
