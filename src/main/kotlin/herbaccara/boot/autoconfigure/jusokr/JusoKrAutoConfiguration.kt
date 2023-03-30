@@ -17,8 +17,6 @@ class JusoKrAutoConfiguration {
 
     @Bean
     fun jusoKrService(properties: JusoKrProperties): JusoKrService {
-        if (properties.confmKey.isEmpty()) throw NullPointerException()
-
         val objectMapper = jacksonObjectMapper().apply {
             findAndRegisterModules()
             configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, properties.failOnUnknownProperties)

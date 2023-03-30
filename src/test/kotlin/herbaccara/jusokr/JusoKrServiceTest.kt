@@ -19,7 +19,25 @@ class JusoKrServiceTest {
 
     @Test
     fun addrLinkApi() {
-        val addrLinkApi = jusoKrService.addrLinkApi("서울시 강남구", 1, 1000)
+        val result = jusoKrService.addrLinkApi("개포주공아파트", 1, 1000)
+        println()
+    }
+
+    @Test
+    fun addrEngApi() {
+        val result = jusoKrService.addrEngApi("서울시 강남구", 1, 1000)
+        println()
+    }
+
+    @Test
+    fun addrDetailApi() {
+        val result = jusoKrService.addrDetailApi(
+            "1168010300",
+            "116804166412",
+            "0",
+            "17",
+            "0"
+        )
         println()
     }
 }

@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import herbaccara.boot.autoconfigure.jusokr.JusoKrProperties
 import herbaccara.jusokr.exception.JusoKrResponseException
-import herbaccara.jusokr.model.Results
+import herbaccara.jusokr.form.SearchType
+import herbaccara.jusokr.model.*
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
 import org.springframework.web.util.UriComponentsBuilder
@@ -55,24 +56,9 @@ class JusoKrService(
         }
     }
 
-    /***
-     * 검색API - 도로명주소
-     * https://business.juso.go.kr/addrlink/openApi/searchApi.do
-     */
-    @JvmOverloads
-    fun addrLinkApi(keyword: String, currentPage: Int = 1, countPerPage: Int = 10): Results {
-        val uri = "/addrlink/addrLinkApi.do"
-        val endpoint = UriComponentsBuilder
-            .fromHttpUrl("${properties.rootUri}$uri")
-            .queryParam("confmKey", properties.confmKey)
-            .queryParam("currentPage", currentPage)
-            .queryParam("countPerPage", countPerPage)
-            .queryParam("keyword", filteredKeyword(keyword))
-            .queryParam("resultType", "json")
-            .toUriString()
-
-        val json = restTemplate.getForObject<JsonNode>(URI(endpoint))
-        val results = objectMapper.readValue<Results>(json["results"].toString())
+    private inline fun <reified T : ApiResult<R>, R> getForObject(url: String): T {
+        val json = restTemplate.getForObject<JsonNode>(URI(url))
+        val results = objectMapper.readValue<T>(json["results"].toString())
 
         val common = results.common
         if (common.errorCode != "0") {
@@ -80,5 +66,111 @@ class JusoKrService(
         }
 
         return results
+    }
+
+    /***
+     * 검색API - 좌표제공
+     * https://business.juso.go.kr/addrlink/openApi/searchApi.do
+     */
+    @JvmOverloads
+    fun addrCoordApi(
+        admCd: String,
+        rnMgtSn: String,
+        udrtYn: String,
+        buldMnnm: String,
+        buldSlno: String
+    ): AddrCoordApiResult {
+        val url = "/addrlink/addrCoordApi.do"
+
+        val endpoint = UriComponentsBuilder
+            .fromHttpUrl("${properties.rootUri}$url")
+            .queryParam("confmKey", properties.coordConfmKey)
+            .queryParam("admCd", admCd)
+            .queryParam("rnMgtSn", rnMgtSn)
+            .queryParam("udrtYn", udrtYn)
+            .queryParam("buldMnnm", buldMnnm)
+            .queryParam("buldSlno", buldSlno)
+            .queryParam("resultType", "json")
+            .toUriString()
+
+        return getForObject(endpoint)
+    }
+
+    /***
+     * 검색API - 상세주소
+     * https://business.juso.go.kr/addrlink/openApi/searchApi.do
+     */
+    @JvmOverloads
+    fun addrDetailApi(
+        admCd: String,
+        rnMgtSn: String,
+        udrtYn: String,
+        buldMnnm: String,
+        buldSlno: String,
+        searchType: SearchType? = null,
+        dongNm: String? = null
+    ): AddrDetailApiResult {
+        val url = "/addrlink/addrDetailApi.do"
+
+        val endpoint = UriComponentsBuilder
+            .fromHttpUrl("${properties.rootUri}$url")
+            .queryParam("confmKey", properties.detailConfmKey)
+            .queryParam("admCd", admCd)
+            .queryParam("rnMgtSn", rnMgtSn)
+            .queryParam("udrtYn", udrtYn)
+            .queryParam("buldMnnm", buldMnnm)
+            .queryParam("buldSlno", buldSlno)
+            .apply {
+                if (searchType != null) {
+                    queryParam("searchType", searchType.name)
+                }
+                if (dongNm.isNullOrBlank().not()) {
+                    queryParam("dongnm", dongNm)
+                }
+            }
+            .queryParam("resultType", "json")
+            .toUriString()
+
+        return getForObject(endpoint)
+    }
+
+    /***
+     * 검색API - 영문주소
+     * https://business.juso.go.kr/addrlink/openApi/searchApi.do
+     */
+    @JvmOverloads
+    fun addrEngApi(keyword: String, currentPage: Int = 1, countPerPage: Int = 10): AddrEngApiResult {
+        val url = "/addrlink/addrEngApi.do"
+
+        val endpoint = UriComponentsBuilder
+            .fromHttpUrl("${properties.rootUri}$url")
+            .queryParam("confmKey", properties.engConfmKey)
+            .queryParam("currentPage", currentPage)
+            .queryParam("countPerPage", countPerPage)
+            .queryParam("keyword", filteredKeyword(keyword))
+            .queryParam("resultType", "json")
+            .toUriString()
+
+        return getForObject(endpoint)
+    }
+
+    /***
+     * 검색API - 도로명주소
+     * https://business.juso.go.kr/addrlink/openApi/searchApi.do
+     */
+    @JvmOverloads
+    fun addrLinkApi(keyword: String, currentPage: Int = 1, countPerPage: Int = 10): AddrLinkApiResult {
+        val url = "/addrlink/addrLinkApi.do"
+
+        val endpoint = UriComponentsBuilder
+            .fromHttpUrl("${properties.rootUri}$url")
+            .queryParam("confmKey", properties.linkConfmKey)
+            .queryParam("currentPage", currentPage)
+            .queryParam("countPerPage", countPerPage)
+            .queryParam("keyword", filteredKeyword(keyword))
+            .queryParam("resultType", "json")
+            .toUriString()
+
+        return getForObject(endpoint)
     }
 }

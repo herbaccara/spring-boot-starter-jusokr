@@ -9,5 +9,8 @@ data class JusoKrProperties(
     val enabled: Boolean = true,
     val rootUri: String = "https://business.juso.go.kr",
     val failOnUnknownProperties: Boolean = false,
-    val confmKey: String
+    val linkConfmKey: String? = null,
+    val engConfmKey: String? = null,
+    val coordConfmKey: String? = null,
+    val detailConfmKey: String? = null
 )

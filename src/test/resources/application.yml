@@ -1,6 +1,8 @@
 jusokr:
   enabled: true
-  confm-Key:
+  link-confm-Key:
+  eng-confm-Key:
+  detail-confm-Key:
 logging:
   level:
     root: info
