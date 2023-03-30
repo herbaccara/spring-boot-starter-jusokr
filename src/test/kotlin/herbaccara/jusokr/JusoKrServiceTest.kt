@@ -30,13 +30,25 @@ class JusoKrServiceTest {
     }
 
     @Test
+    fun addrCoordApi() {
+        val result = jusoKrService.addrCoordApi(
+            "1168010300",
+            "116804166412",
+            "0",
+            17,
+            0
+        )
+        println()
+    }
+
+    @Test
     fun addrDetailApi() {
         val result = jusoKrService.addrDetailApi(
             "1168010300",
             "116804166412",
             "0",
-            "17",
-            "0"
+            17,
+            0
         )
         println()
     }

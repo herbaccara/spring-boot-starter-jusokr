@@ -1,8 +1,9 @@
 jusokr:
   enabled: true
-  link-confm-Key:
-  eng-confm-Key:
-  detail-confm-Key:
+  link-confm-Key: TESTJUSOGOKR
+  eng-confm-Key: TESTJUSOGOKR
+  coord-confm-key: TESTJUSOGOKR
+  detail-confm-Key: TESTJUSOGOKR
 logging:
   level:
     root: info
