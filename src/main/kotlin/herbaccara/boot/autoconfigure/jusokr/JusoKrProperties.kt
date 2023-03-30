@@ -9,8 +9,12 @@ data class JusoKrProperties(
     val enabled: Boolean = true,
     val rootUri: String = "https://business.juso.go.kr",
     val failOnUnknownProperties: Boolean = false,
-    val linkConfmKey: String? = null,
-    val engConfmKey: String? = null,
-    val coordConfmKey: String? = null,
-    val detailConfmKey: String? = null
-)
+    val confmKey: ConfmKey = ConfmKey()
+) {
+    data class ConfmKey(
+        val link: String? = null,
+        val eng: String? = null,
+        val coord: String? = null,
+        val detail: String? = null,
+    )
+}

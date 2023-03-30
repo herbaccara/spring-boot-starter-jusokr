@@ -84,7 +84,7 @@ class JusoKrService(
 
         val endpoint = UriComponentsBuilder
             .fromHttpUrl("${properties.rootUri}$url")
-            .queryParam("confmKey", properties.coordConfmKey)
+            .queryParam("confmKey", properties.confmKey.coord)
             .queryParam("admCd", admCd.filter { it.isDigit() })
             .queryParam("rnMgtSn", rnMgtSn.filter { it.isDigit() })
             .queryParam("udrtYn", udrtYn.filter { it.isDigit() })
@@ -114,7 +114,7 @@ class JusoKrService(
 
         val endpoint = UriComponentsBuilder
             .fromHttpUrl("${properties.rootUri}$url")
-            .queryParam("confmKey", properties.detailConfmKey)
+            .queryParam("confmKey", properties.confmKey.detail)
             .queryParam("admCd", admCd.filter { it.isDigit() })
             .queryParam("rnMgtSn", rnMgtSn.filter { it.isDigit() })
             .queryParam("udrtYn", udrtYn.filter { it.isDigit() })
@@ -144,7 +144,7 @@ class JusoKrService(
 
         val endpoint = UriComponentsBuilder
             .fromHttpUrl("${properties.rootUri}$url")
-            .queryParam("confmKey", properties.engConfmKey)
+            .queryParam("confmKey", properties.confmKey.eng)
             .queryParam("currentPage", currentPage)
             .queryParam("countPerPage", countPerPage)
             .queryParam("keyword", filteredKeyword(keyword))
@@ -164,7 +164,7 @@ class JusoKrService(
 
         val endpoint = UriComponentsBuilder
             .fromHttpUrl("${properties.rootUri}$url")
-            .queryParam("confmKey", properties.linkConfmKey)
+            .queryParam("confmKey", properties.confmKey.link)
             .queryParam("currentPage", currentPage)
             .queryParam("countPerPage", countPerPage)
             .queryParam("keyword", filteredKeyword(keyword))
