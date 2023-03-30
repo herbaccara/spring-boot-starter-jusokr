@@ -37,7 +37,7 @@ class JusoKrService(
 
         internal fun filteredKeyword(keyword: String): String {
             var filteredKeyword = keyword
-            for (reservedWord in JusoKrService.reservedWords) {
+            for (reservedWord in reservedWords) {
                 if (filteredKeyword.contains(reservedWord, true)) {
                     filteredKeyword = filteredKeyword.replace(reservedWord, "", true)
                 }
