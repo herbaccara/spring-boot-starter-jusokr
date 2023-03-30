@@ -16,6 +16,39 @@ class JusoKrService(
     private val objectMapper: ObjectMapper,
     private val properties: JusoKrProperties
 ) {
+    companion object {
+
+        private val reservedWords = listOf(
+            "OR",
+            "SELECT",
+            "INSERT",
+            "DELETE",
+            "UPDATE",
+            "CREATE",
+            "DROP",
+            "EXEC",
+            "UNION",
+            "FETCH",
+            "DECLARE",
+            "TRUNCATE"
+        )
+
+        private val specialCharacters = listOf("%", "=", ">", "<")
+
+        internal fun filteredKeyword(keyword: String): String {
+            var filteredKeyword = keyword
+            for (reservedWord in JusoKrService.reservedWords) {
+                if (filteredKeyword.contains(reservedWord, true)) {
+                    filteredKeyword = filteredKeyword.replace(reservedWord, "", true)
+                }
+            }
+            for (c in specialCharacters) {
+                filteredKeyword = filteredKeyword.replace(c, "")
+            }
+            return filteredKeyword.replace("\\s+".toRegex(), " ")
+        }
+    }
+
     /***
      * 검색API - 도로명주소
      * https://business.juso.go.kr/addrlink/openApi/searchApi.do
@@ -28,7 +61,7 @@ class JusoKrService(
             .queryParam("confmKey", properties.confmKey)
             .queryParam("currentPage", currentPage)
             .queryParam("countPerPage", countPerPage)
-            .queryParam("keyword", keyword)
+            .queryParam("keyword", filteredKeyword(keyword))
             .queryParam("resultType", "json")
             .toUriString()
 
