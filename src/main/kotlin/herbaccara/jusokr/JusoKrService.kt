@@ -68,7 +68,7 @@ class JusoKrService(
         return results
     }
 
-    /***
+    /**
      * 검색API - 좌표제공
      * https://business.juso.go.kr/addrlink/openApi/searchApi.do
      */
@@ -96,7 +96,7 @@ class JusoKrService(
         return getForObject(endpoint)
     }
 
-    /***
+    /**
      * 검색API - 상세주소
      * https://business.juso.go.kr/addrlink/openApi/searchApi.do
      */
@@ -134,7 +134,7 @@ class JusoKrService(
         return getForObject(endpoint)
     }
 
-    /***
+    /**
      * 검색API - 영문주소
      * https://business.juso.go.kr/addrlink/openApi/searchApi.do
      */
@@ -154,7 +154,7 @@ class JusoKrService(
         return getForObject(endpoint)
     }
 
-    /***
+    /**
      * 검색API - 도로명주소
      * https://business.juso.go.kr/addrlink/openApi/searchApi.do
      */
